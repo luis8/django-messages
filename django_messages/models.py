@@ -63,8 +63,8 @@ class Message(models.Model):
     recipient_deleted_at = models.DateTimeField(_("Recipient deleted at"), null=True, blank=True)
 
     #allow filtering messages by specific models
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    object_id = models.PositiveIntegerField(null=True)
     content_object = GenericForeignKey('content_type', 'object_id')
 
 
