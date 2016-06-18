@@ -32,6 +32,7 @@ class ComposeForm(forms.Form):
         recipients = self.cleaned_data['recipient']
         subject = self.cleaned_data['subject']
         body = self.cleaned_data['body']
+        content_object = self.cleaned_data['debt']
         message_list = []
         for r in recipients:
             msg = Message(
@@ -39,6 +40,7 @@ class ComposeForm(forms.Form):
                 recipient = r,
                 subject = subject,
                 body = body,
+                content_object = content_object
             )
             if parent_msg is not None:
                 msg.parent_msg = parent_msg
