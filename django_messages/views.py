@@ -31,6 +31,7 @@ def inbox(request, obj_filter=None, template_name='django_messages/inbox.html'):
         message_list = message_list.filter(object_id=obj_filter)
     return render_to_response(template_name, {
         'message_list': message_list,
+        'obj_filter':obj_filter
     }, context_instance=RequestContext(request))
 
 @login_required
