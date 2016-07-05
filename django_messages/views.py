@@ -29,6 +29,7 @@ def inbox(request, obj_filter=None, template_name='django_messages/inbox.html'):
     message_list = Message.objects.inbox_for(request.user)
     if obj_filter:
         message_list = message_list.filter(object_id=obj_filter)
+        obj_filter = int(obj_filter)
     return render_to_response(template_name, {
         'message_list': message_list,
         'obj_filter':obj_filter
