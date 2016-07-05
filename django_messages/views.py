@@ -36,17 +36,20 @@ def inbox(request, obj_filter=None, template_name='django_messages/inbox.html'):
     }, context_instance=RequestContext(request))
 
 @login_required
-def outbox(request, template_name='django_messages/outbox.html'):
+def outbox(request, obj_filter=None, template_name='django_messages/outbox.html'):
     """
     Displays a list of sent messages by the current user.
     Optional arguments:
         ``template_name``: name of the template to use.
     """
     message_list = Message.objects.outbox_for(request.user)
+    if obj_filter:
+        message_list = message_list.filter(object_id=obj_filter)
+        obj_filter = int(obj_filter)
     return render_to_response(template_name, {
         'message_list': message_list,
+        'obj_filter':obj_filter
     }, context_instance=RequestContext(request))
-
 @login_required
 def trash(request, template_name='django_messages/trash.html'):
     """
